@@ -1,0 +1,68 @@
+li {
+    display:inline-block;
+    font-size:0.8em;
+    font-family: arial,sans-serif;
+}
+body {
+    margin: unset;
+}
+#topright {
+    position: absolute;
+    word-spacing: 1.5em;
+    top: 0;
+    right:30px;
+}
+#topleft {
+    position: absolute;
+    word-spacing: 1.5em;
+    top: 0;
+    left:0px;
+}
+#dots {
+    position:relative;
+    top: 7px;
+    width:1.5em; 
+    height:1.5em;
+}
+#goog {
+    position: relative;
+    top: 150px;
+    left:35em;
+
+}
+.highlight {
+    background-color: rgb(0, 140, 255);
+    border-radius: 3px;
+    color: white;
+    font-family: Impact;
+    word-spacing: normal;
+}
+textarea {
+    position:relative;
+    border-radius: 22px;
+    line-height: 2.3em;
+    border: 1px grey solid;
+    top: 150px;
+    left: 10em;
+}
+.search, .gamble {
+    color: rgb(128, 128, 128);
+    position:relative;
+    top:170px;
+    left:37em;
+    font-size:.9em;
+    border-radius:2px;
+    background-color: #D3D3D3;
+    word-spacing: normal;
+}
+.foot {
+    position: relative;
+    color: #696969;
+    top:25em;
+    border: 0.5px gray solid;
+    left:0;
+    font-size:0.9em;
+    word-spacing: 1.5em;
+    background-color: #DCDCDC;
+    line-height: 3.7em;
+}
