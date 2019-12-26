@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            function computerPlay() {
+                let num = Math.floor(Math.random()*3);
+                if (num==0) {
+                    return 'rock';
+                } else if (num==1) {
+                    return 'paper';
+                } else {
+                    return 'scissors';
+                }
+            }
+            function userPlay() {
+                let userMove = prompt('Enter your move (rock/paper/scissors)', '');
+                userMove= userMove.toLowerCase();
+                if (userMove!='rock' && userMove!='paper' && userMove!='scissors') {
+                    userPlay();
+                    }
+                return userMove;
+            }
+            function round(userMove, compMove) {
+                    if (userMove==compMove){
+                        console.log('The computer used ' + compMove+' as well. You tied!');
+                        return 'tie';
+                    } else if ((userMove=='rock' && compMove=='scissors') || (userMove=='paper' &&compMove=='rock') || 
+                               (userMove=='scissors' && compMove=='paper')) {;
+                        console.log('The computer used '+compMove+' and ' +userMove+' beats '+compMove+'. You win!!');
+                        return 'win';
+                    } else if ((compMove=='rock' && userMove=='scissors') || (compMove=='paper' &&userMove=='rock') || 
+                               (compMove=='scissors' && userMove=='paper')) {
+                        console.log('The computer used '+compMove+' and ' +compMove+' beats '+userMove+'. You lose!!');
+                        return 'loss';
+                        }
+                }
+            function game() {
+                let compPoints=0;
+                let userPoints=0;
+                for (let i=0;i<5;i++) {
+                    let userMove=userPlay();
+                    let compMove=computerPlay();
+                    let outcome=round(userMove, compMove, compPoints, userPoints);
+                    if (outcome=='win') {
+                        userPoints+=1;
+                    } else if (outcome=='loss') {
+                        compPoints+=1;
+                    }
+                }
+                if (userPoints>compPoints) {
+                    console.log('You win the seris!!');
+                } else if (compPoints>userPoints) {
+                    console.log('The computer wins the series!!');
+                } else {
+                    console.log('You and the computer tied in the series!!');
+                }
+            }
+            console.log(game());
+        </script>
+    </body>
+</html>
