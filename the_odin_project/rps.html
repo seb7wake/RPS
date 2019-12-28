@@ -1,61 +1,92 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <div id = 'bigDiv'>
+        <h2>Choose one of the three moves:</h2>
+        <button id='rock'>Rock</button>
+        <button id = 'paper'>Paper</button>
+        <button id = 'scissors'>Scissors</button>
+        </div>
         <script>
+            const bigDiv = document.querySelector('#bigDiv')
+            let rock = document.querySelector('#rock');
+            let paper = document.querySelector('#paper');
+            let scissors = document.querySelector('#scissors');
+            
+            let btn = document.querySelectorAll('button')
+            btn.onclick = 'game()';
+            
+            let userPoints=0;
+            let compPoints=0;
+            rock.onclick = function() {
+                round('rock', computerPlay(), userPoints, compPoints);
+            }
+            paper.onclick= function() {
+                round('paper', computerPlay(), userPoints, compPoints);
+            }
+            scissors.onclick= function() {
+                round('scissors', computerPlay(), userPoints, compPoints);
+            }
+
             function computerPlay() {
-                let num = Math.floor(Math.random()*3);
-                if (num==0) {
-                    return 'rock';
-                } else if (num==1) {
-                    return 'paper';
-                } else {
-                    return 'scissors';
+                /*
+                Creates a random turn for the computer.
+                */
+                let num = Math.floor(Math.random()*3); //initializing a random number
+                if (num==0) {        //--------|
+                    return 'rock';   //        |
+                } else if (num==1) { //        |-----computers move based on random number value
+                    return 'paper';  //        |
+                } else {               //      |    
+                    return 'scissors';  //-----|
                 }
             }
-            function userPlay() {
-                let userMove = prompt('Enter your move (rock/paper/scissors)', '');
-                userMove= userMove.toLowerCase();
-                if (userMove!='rock' && userMove!='paper' && userMove!='scissors') {
-                    userPlay();
-                    }
-                return userMove;
-            }
-            function round(userMove, compMove) {
+            function round(userMove, compMove, userPoints, compPoints) {
                     if (userMove==compMove){
-                        console.log('The computer used ' + compMove+' as well. You tied!');
-                        return 'tie';
-                    } else if ((userMove=='rock' && compMove=='scissors') || (userMove=='paper' &&compMove=='rock') || 
-                               (userMove=='scissors' && compMove=='paper')) {;
-                        console.log('The computer used '+compMove+' and ' +userMove+' beats '+compMove+'. You win!!');
-                        return 'win';
-                    } else if ((compMove=='rock' && userMove=='scissors') || (compMove=='paper' &&userMove=='rock') || 
-                               (compMove=='scissors' && userMove=='paper')) {
-                        console.log('The computer used '+compMove+' and ' +compMove+' beats '+userMove+'. You lose!!');
-                        return 'loss';
+                        let tie = document.createElement('div');
+                        tie.textContent = 'The computer used ' + compMove+' as well. You tied!'
+                        bigDiv.appendChild(tie);                                                                                  
+                    } else if ((userMove=='rock' && compMove=='scissors') || (userMove=='paper' &&compMove=='rock') ||  
+                               (userMove=='scissors' && compMove=='paper')) {;                                      
+                        let win = document.createElement('div');
+                        win.textContent = 'The computer used ' + compMove+' and '+userMove+' beats '+compMove+'. You win!!'
+                        bigDiv.appendChild(win);
+                        addUserPoints();                                                                                   
+                    } else if ((compMove=='rock' && userMove=='scissors') || (compMove=='paper' &&userMove=='rock') ||
+                               (compMove=='scissors' && userMove=='paper')) {                                        
+                        let loss = document.createElement('div');
+                        loss.textContent = 'The computer used ' + compMove+' and '+compMove+ ' beats '+userMove+'. You lost!'
+                        bigDiv.appendChild(loss);
+                        addCompPoints() 
                         }
                 }
-            function game() {
-                let compPoints=0;
-                let userPoints=0;
-                for (let i=0;i<5;i++) {
-                    let userMove=userPlay();
-                    let compMove=computerPlay();
-                    let outcome=round(userMove, compMove, compPoints, userPoints);
-                    if (outcome=='win') {
+                function addUserPoints() {
                         userPoints+=1;
-                    } else if (outcome=='loss') {
-                        compPoints+=1;
+                    if (userPoints==5) {
+                        let winner = document.createElement('div');
+                        winner.textContent = 'You win the series!!!'
+                        bigDiv.appendChild(winner);
+                        playAgain()
                     }
                 }
-                if (userPoints>compPoints) {
-                    console.log('You win the seris!!');
-                } else if (compPoints>userPoints) {
-                    console.log('The computer wins the series!!');
-                } else {
-                    console.log('You and the computer tied in the series!!');
+                function addCompPoints() {
+                    compPoints+=1;
+                    if (compPoints==5) {
+                        let loser = document.createElement('div');
+                        loser.textContent = 'You lost the series!!!'
+                        bigDiv.appendChild(loser)
+                        playAgain()
+                    }
                 }
-            }
-            console.log(game());
+                function playAgain() {
+                    let restart = document.createElement('button');
+                    restart.textContent = 'Press to play again'
+                    restart.style.color =  "blue"
+                    bigDiv.appendChild(restart)
+                    restart.onclick = function () {
+                        location = location;
+                    }
+                }
         </script>
     </body>
 </html>
